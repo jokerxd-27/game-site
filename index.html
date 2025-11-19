@@ -154,6 +154,37 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* NEW: Hero Section Game-related Effects */
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px var(--accent-color); }
+            50% { box-shadow: 0 0 30px var(--accent-color), 0 0 60px rgba(252, 163, 17, 0.4); }
+            100% { box-shadow: 0 0 10px var(--accent-color); }
+        }
+
+        @keyframes subtleMove {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-10px, 15px) scale(1.01); }
+            66% { transform: translate(10px, -15px) scale(0.99); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .hero-effect-orb {
+            position: absolute;
+            background: radial-gradient(circle, rgba(252,163,17,0.8) 0%, rgba(252,163,17,0) 70%); /* Accent color glow */
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(20px); /* Soft blur */
+            opacity: 0.4;
+            animation: glow 4s ease-in-out infinite alternate, subtleMove 10s ease-in-out infinite;
+            z-index: 5; /* Below content (z-10) but above background image/overlay */
+        }
+        /* Variations for orbs */
+        .hero-effect-orb-1 { width: 150px; height: 150px; top: 10%; left: 15%; animation-delay: 0s, 0s; }
+        .hero-effect-orb-2 { width: 200px; height: 200px; top: 60%; left: 80%; animation-delay: 1.5s, 3s; }
+        .hero-effect-orb-3 { width: 100px; height: 100px; top: 30%; left: 50%; animation-delay: 0.7s, 6s; }
+        .hero-effect-orb-4 { width: 180px; height: 180px; top: 80%; left: 25%; animation-delay: 2.2s, 9s; }
+        .hero-effect-orb-5 { width: 120px; height: 120px; top: 20%; left: 70%; animation-delay: 0.3s, 2s; }
     </style>
 </head>
 <body class="bg-primary-bg text-text-light antialiased overflow-x-hidden">
@@ -193,7 +224,18 @@
         <!-- Hero Section -->
         <section id="hero" class="relative h-screen bg-cover bg-center flex items-center justify-center text-center px-6"
             style="background-image: url('https://image.pollinations.ai/prompt/futuristic%20cyberpunk%20city%20game%20scene%20neon%20lights%20epic%20sci-fi%20hero%20shot%20dramatic%20wide%20angle?width=1920&height=1080&nologo=true');">
-            <div class="absolute inset-0 bg-gradient-to-t from-primary-bg via-transparent to-primary-bg opacity-90"></div>
+            <!-- Modified: Opacity adjusted from 90 to 80 for better effect visibility -->
+            <div class="absolute inset-0 bg-gradient-to-t from-primary-bg via-transparent to-primary-bg opacity-80"></div>
+            
+            <!-- NEW: Dynamic game-related effects -->
+            <div class="absolute inset-0 pointer-events-none z-5">
+                <div class="hero-effect-orb hero-effect-orb-1"></div>
+                <div class="hero-effect-orb hero-effect-orb-2"></div>
+                <div class="hero-effect-orb hero-effect-orb-3"></div>
+                <div class="hero-effect-orb hero-effect-orb-4"></div>
+                <div class="hero-effect-orb hero-effect-orb-5"></div>
+            </div>
+
             <div class="relative z-10 max-w-5xl mx-auto py-20 px-8 glass-card rounded-3xl animate-fade-in-scale" style="animation-delay: 0.2s;">
                 <h1 class="text-6xl md:text-8xl font-extrabold leading-tight mb-6 text-gradient-orange-red drop-shadow-lg">
                     Unleash Your Legend
@@ -345,6 +387,7 @@
                         </div>
                     </div>
                     <div class="relative group rounded-2xl overflow-hidden shadow-xl glass-card border border-transparent hover:border-accent-color transition duration-300 transform hover:scale-105 js-animate-init">
+                        <!-- Screenshots 3, 4, 5, 6 already have distinct images from Pollinations AI. No change needed here. -->
                         <img src="https://image.pollinations.ai/prompt/game%20screenshot%20desert%20fortress%20epic%20battle%20sandstorm%20fantasy?width=800&height=450&nologo=true"
                              alt="Screenshot 3" class="w-full h-auto object-cover">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 flex items-center justify-center transition-all duration-300">
@@ -381,10 +424,10 @@
             <div class="container mx-auto px-6 text-center max-w-7xl">
                 <h2 class="text-5xl md:text-6xl font-extrabold mb-16 text-gradient-orange-red js-animate-init">Latest Intel</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                    <!-- News Article 1 -->
+                    <!-- News Article 1 - Image changed -->
                     <div class="glass-card p-8 rounded-3xl shadow-xl flex flex-col justify-between transform hover:scale-105 transition duration-300 ease-in-out js-animate-init">
                         <div>
-                            <img src="https://image.pollinations.ai/prompt/game%20news%20article%20concept%20art%20new%20character%20reveal%20dynamic%20shot?width=600&height=350&nologo=true"
+                            <img src="https://image.pollinations.ai/prompt/game%20news%20thumbnail%20fantasy%20rogue%20character%20shadow%20cloak%20glowing%20eyes%20concept%20art?width=600&height=350&nologo=true"
                                  alt="News 1 Thumbnail" class="rounded-xl mb-6 w-full object-cover h-56">
                             <h3 class="text-3xl font-bold mb-4 text-left">New Character Reveal: The Shadow Weaver</h3>
                             <p class="text-gray-400 text-lg text-left mb-5">
@@ -396,10 +439,10 @@
                             <a href="#" class="text-accent-color hover:underline text-lg font-semibold">Read More <i class="fas fa-arrow-right ml-2"></i></a>
                         </div>
                     </div>
-                    <!-- News Article 2 -->
+                    <!-- News Article 2 - Image changed -->
                     <div class="glass-card p-8 rounded-3xl shadow-xl flex flex-col justify-between transform hover:scale-105 transition duration-300 ease-in-out js-animate-init">
                         <div>
-                            <img src="https://image.pollinations.ai/prompt/game%20news%20article%20patch%20notes%20icon%20update%20UI%20abstract?width=600&height=350&nologo=true"
+                            <img src="https://image.pollinations.ai/prompt/game%20news%20thumbnail%20ancient%20ruins%20glowing%20portal%20fantasy%20discovery%20cinematic?width=600&height=350&nologo=true"
                                  alt="News 2 Thumbnail" class="rounded-xl mb-6 w-full object-cover h-56">
                             <h3 class="text-3xl font-bold mb-4 text-left">Patch 1.2.0: The Ancient's Awakening</h3>
                             <p class="text-gray-400 text-lg text-left mb-5">
@@ -411,10 +454,10 @@
                             <a href="#" class="text-accent-color hover:underline text-lg font-semibold">Read More <i class="fas fa-arrow-right ml-2"></i></a>
                         </div>
                     </div>
-                    <!-- News Article 3 -->
+                    <!-- News Article 3 - Image changed -->
                     <div class="glass-card p-8 rounded-3xl shadow-xl flex flex-col justify-between transform hover:scale-105 transition duration-300 ease-in-out js-animate-init">
                         <div>
-                            <img src="https://image.pollinations.ai/prompt/game%20news%20article%20community%20event%20players%20together%20icon%20gaming%20center?width=600&height=350&nologo=true"
+                            <img src="https://image.pollinations.ai/prompt/game%20news%20thumbnail%20esports%20arena%20team%20celebrating%20victory%20fantasy%20gaming?width=600&height=350&nologo=true"
                                  alt="News 3 Thumbnail" class="rounded-xl mb-6 w-full object-cover h-56">
                             <h3 class="text-3xl font-bold mb-4 text-left">Community Spotlight: Guild Wars Triumph</h3>
                             <p class="text-gray-400 text-lg text-left mb-5">
